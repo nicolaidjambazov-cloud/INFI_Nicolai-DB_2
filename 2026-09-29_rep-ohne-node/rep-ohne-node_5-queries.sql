@@ -1,4 +1,4 @@
-// rep-ohne-node: 5 Queries als .sql
+-- rep-ohne-node: 5 Queries als .sql
 -- 1. Top-Künstler nach Track-Anzahl (JOIN + GROUP BY + ORDER BY + LIMIT)
 SELECT k.name, COUNT(*) AS tracks
 FROM kuenstler k JOIN song s ON s.kuenstler_id = k.id

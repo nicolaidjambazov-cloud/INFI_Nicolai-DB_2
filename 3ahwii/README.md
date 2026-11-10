@@ -36,6 +36,8 @@ Original der ORM-Einstiegsstunde: Prepared Lesson
 | 2026-09-15 | S | [Agentic Coding – Einstieg (Sondereinheit, beide Gruppen; Schulübung, HÜ nur X)](2026-09-15_agentic-coding-einstieg/) |
 | 2026-09-29 | 1b | [Rep ohne Node + ORM-Lektüre (X-Gruppe, Deno + node:sqlite, dev.to-Leseauftrag)](2026-09-29_rep-ohne-node/) |
 | 2026-10-06 | 2 | [Normalisierung 3NF – Fehlersuche (X-Gruppe, Teach-HTML, ohne Node)](2026-10-06_normalisierung-3nf/) |
+| 2026-10-06 | 2 | [HÜ Normalformen 1NF–3NF mit Prisma 7 (Schema, Migration, Seed, 9 Tests)](../2026-10-06_normalformen-prisma/) |
+| 2026-10-13 | 3 | [Drizzle ORM – Projekt gelesen, 3 Queries ergänzt, SQL-Vergleich (12 Tests)](../2026-10-13_drizzle-orm/) |
 
 ## Log SJ 2026/27
 

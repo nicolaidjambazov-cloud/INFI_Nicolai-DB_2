@@ -19,6 +19,8 @@ Key technologies:
 - KM5-01-nodejs-prisma/: Lesson + praxis (Node/Prisma 7). Praxis läuft mit tsx, Tests node --import tsx --test.
 - 2026-09-29_rep-ohne-node/: Rep-Stunde ohne Node (Deno + node:sqlite), Seed + Tests (deno test --allow-read --allow-write).
 - 2026-10-06_normalisierung-3nf/: Normalisierung 3NF, demo.ts + Tests (Deno), Lesson + Assets.
+- 2026-10-06_normalformen-prisma/: HÜ Normalformen mit Prisma 7 (Node/npm + tsx), npm run run / npm test.
+- 2026-10-13_drizzle-orm/: Drizzle ORM 1.0-rc (Deno + node:sqlite), deno task demo / deno task test. Braucht Deno >= 2.9 (setReturnArrays).
 - ssets/, eference/: Gemeinsame Ressourcen (Style/Quiz + Glossar/Spickzettel).
 - README.md: Repo-Übersicht.
 

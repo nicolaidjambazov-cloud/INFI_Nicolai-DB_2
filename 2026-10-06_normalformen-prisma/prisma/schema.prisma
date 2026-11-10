@@ -1,0 +1,110 @@
+// Prisma-Schema — HÜ Normalformen (KM5-02), alle Tabellen in 3NF.
+// @@map/@map halten die DB-Namen in snake_case wie im Seed der Lesson,
+// im TypeScript-Code heißen Modelle/Felder camelCase.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ---------------------------------------------------------------------
+// Teil 1+2: bestellung_denorm(bestell_nr, kunde, plz, ort)
+// 3NF-Verletzung: bestell_nr → plz → ort  ⇒  plz → ort auslagern
+// ---------------------------------------------------------------------
+
+model Plz {
+  plz         String       @id
+  ort         String
+  bestellungen Bestellung[]
+
+  @@map("plz")
+}
+
+model Bestellung {
+  bestellNr  Int               @id @map("bestell_nr")
+  kunde      String
+  plzId      String            @map("plz")
+  plz        Plz               @relation(fields: [plzId], references: [plz])
+  positionen Bestellposition[]
+
+  @@map("bestellung")
+}
+
+// Erweiterung aus „Jetzt du!": bestellung(..., tracks, ...) mit Liste in der Zelle.
+// 1NF-Fix: eine Zeile pro Vorkommen, Positionsnummer als Teil des PK.
+model Track {
+  trackId    Int               @id @map("track_id")
+  titel      String
+  positionen Bestellposition[]
+
+  @@map("track")
+}
+
+model Bestellposition {
+  bestellNr  Int        @map("bestell_nr")
+  position   Int
+  trackId    Int        @map("track_id")
+  bestellung Bestellung @relation(fields: [bestellNr], references: [bestellNr], onDelete: Cascade)
+  track      Track      @relation(fields: [trackId], references: [trackId])
+
+  @@id([bestellNr, position])
+  @@map("bestellposition")
+}
+
+// ---------------------------------------------------------------------
+// Teil 3a: song_playlist_denorm(song_id, playlist_id, song_titel)
+// 2NF-Verletzung: song_id → song_titel (nur ein Teil des PK)
+// ---------------------------------------------------------------------
+
+model Song {
+  songId    Int            @id @map("song_id")
+  titel     String
+  dauerSek  Int            @map("dauer_sek")
+  playlists SongPlaylist[]
+
+  @@map("song")
+}
+
+model Playlist {
+  playlistId Int            @id @map("playlist_id")
+  name       String
+  songs      SongPlaylist[]
+
+  @@map("playlist")
+}
+
+model SongPlaylist {
+  songId     Int      @map("song_id")
+  playlistId Int      @map("playlist_id")
+  song       Song     @relation(fields: [songId], references: [songId])
+  playlist   Playlist @relation(fields: [playlistId], references: [playlistId])
+
+  @@id([songId, playlistId])
+  @@map("song_playlist")
+}
+
+// ---------------------------------------------------------------------
+// Teil 3b: konto_denorm(iban, inhaber, blz, bankname)
+// 3NF-Verletzung: iban → blz → bankname  ⇒  blz → bankname auslagern
+// ---------------------------------------------------------------------
+
+model Bank {
+  blz      String  @id
+  bankname String
+  konten   Konto[]
+
+  @@map("bank")
+}
+
+model Konto {
+  iban    String @id
+  inhaber String
+  blz     String
+  bank    Bank   @relation(fields: [blz], references: [blz])
+
+  @@map("konto")
+}

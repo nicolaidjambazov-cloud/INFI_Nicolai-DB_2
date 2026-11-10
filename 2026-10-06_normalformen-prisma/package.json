@@ -1,0 +1,32 @@
+{
+  "name": "normalformen-prisma",
+  "version": "1.0.0",
+  "description": "HÜ 2026-10-06: bestellung_denorm + zwei Quiz-Tabellen bis 3NF, umgesetzt mit Prisma 7 (SQLite)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx --test test/normalformen.test.ts",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:seed": "tsx src/seed.ts",
+    "db:reset": "prisma migrate reset --force",
+    "run": "tsx src/demo.ts",
+    "studio": "prisma studio --url file://./dev.db",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "dotenv": "^18.0.4",
+    "prisma": "^7.10.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15"
+  },
+  "allowScripts": {
+    "@prisma/engines@7.10.1": true,
+    "better-sqlite3@12.11.1": true,
+    "prisma@7.10.1": true,
+    "esbuild@0.28.2": true
+  }
+}
